@@ -1,4 +1,5 @@
-﻿import telebot
+ADMIN_ID = 5498589320 # (استبدل الرقم برقم الآيدي الحقيقي مالتك مال تليجرام)
+import telebot
 import requests
 from telebot.types import InlineKeyboardMarkup, InlineKeyboardButton
 import os
@@ -28,8 +29,13 @@ def search_media(query):
     response = requests.get(url).json()
     return response.get('results', [])
 
-@bot.message_handler(commands=['start'])
-def send_welcome(message):
+# هذا السطرين تخليهم هنا بداخل الـ start مباشرة:
+  try:
+    bot.send_message(
+        ADMIN_ID, f'🔔 عضو جديد دخل للبوت: {message.from_user.first_name}'
+    )
+  except:
+    pass
     text = (
         "أهلاً بك في بوت **FLIXORA** الشامل 🎬\n\n"
         "البوت الآن مرتبط بأكبر مكتبة أفلام ومسلسلات عالمية!\n"
